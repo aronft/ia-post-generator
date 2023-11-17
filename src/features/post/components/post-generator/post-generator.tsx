@@ -1,10 +1,14 @@
 import { Button } from '@/components/ui/atoms/button'
+import { Chip } from '@/components/ui/atoms/chip'
 
 export const PostGenerator = () => {
     return (
         <form>
             <div>
                 <span>Social platform</span>
+                <div>
+                    <Chip>facebook icon</Chip>
+                </div>
             </div>
             <div>
                 <div>
