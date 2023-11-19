@@ -1,15 +1,15 @@
 import { Button } from '@/components/ui/atoms/button'
-import { Chip } from '@/components/ui/atoms/chip'
+import { SocialSection } from './social-section'
 
 export const PostGenerator = () => {
     return (
         <form>
-            <div>
-                <span>Social platform</span>
-                <div>
-                    <Chip>facebook icon</Chip>
-                </div>
-            </div>
+            <fieldset>
+                <legend className="text-2xl font-medium mb-4">
+                    Social platform
+                </legend>
+                <SocialSection />
+            </fieldset>
             <div>
                 <div>
                     <label htmlFor="">Your message</label>
