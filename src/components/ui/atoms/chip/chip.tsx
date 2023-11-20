@@ -1,6 +1,6 @@
 import { cn } from '@/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { HTMLAttributes, LabelHTMLAttributes } from 'react'
+import { HTMLAttributes } from 'react'
 
 const chipVariants = cva(
     'leading-[1] inline-block border border-gray-300 hover:bg-green-100 hover:border-green-500 hover:text-green-500',
@@ -20,29 +20,23 @@ const chipVariants = cva(
 interface ChipProps
     extends VariantProps<typeof chipVariants>,
         HTMLAttributes<HTMLSpanElement> {
-    isActive?: boolean
-    toggle: () => void
-    children: React.ReactElement
+    children: React.ReactNode
 }
 
 export const Chip = ({
-    isActive,
-    toggle,
     variant,
     children,
+    className,
+    onClick,
     ...props
 }: ChipProps) => {
     return (
         <span
-            onClick={() => toggle()}
+            onClick={(e) => onClick && onClick(e)}
             className={cn(
                 chipVariants({
                     variant,
-                    className: `${
-                        isActive
-                            ? 'bg-green-100 border-green-500'
-                            : ' bg-transparent '
-                    }`,
+                    className,
                 })
             )}
             {...props}

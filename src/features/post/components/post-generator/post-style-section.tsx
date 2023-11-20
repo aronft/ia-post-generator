@@ -1,30 +1,27 @@
-/// <reference types="vite-plugin-svgr/client" />
 import { Chip } from '@/components/ui/atoms/chip'
-import { SocialPlatformData } from '@/features/social-platform/constants'
 import { RadioField } from './radio-field'
+import { PostStyleData } from '@/features/post-styles/constants'
 import { useToggleArray } from '../../hooks/use-toggle-array'
 
-export const SocialSection = () => {
-    const { toggle, data } = useToggleArray(SocialPlatformData)
-
+export const PostStyleSection = () => {
+    const { toggle, data } = useToggleArray(PostStyleData)
     return (
-        <div className="flex gap-2">
-            {data.map(({ Component, id, name, isActive }) => (
+        <div className="flex gap-2 flex-wrap">
+            {data.map(({ id, name, isActive }) => (
                 <RadioField
                     key={id}
                     id={id}
-                    name="platform"
+                    name="style"
                     onChange={() => toggle({ id, key: 'isActive' })}
                 >
                     <Chip
-                        variant={'icon'}
-                        className={` ${
+                        className={`capitalize ${
                             isActive
                                 ? 'bg-green-100 border-green-500 text-green-500'
                                 : ''
                         }`}
                     >
-                        <Component aria-label={`${name} icon option`} />
+                        {name}
                     </Chip>
                 </RadioField>
             ))}
