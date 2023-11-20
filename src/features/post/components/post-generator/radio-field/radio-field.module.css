@@ -1,0 +1,3 @@
+.radio-field input[type="radio"]:focus-within + label > * {
+    outline: auto;
+}
