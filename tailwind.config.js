@@ -6,6 +6,14 @@ export default {
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],
             },
+            colors: {
+                brand: {
+                    gray: '#939393',
+                    green: {
+                        400: '#40a14c',
+                    },
+                },
+            },
         },
     },
     plugins: [],

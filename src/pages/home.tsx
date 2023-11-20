@@ -1,7 +1,6 @@
 import { Container } from '@/components/ui/objects/container'
 import { PostGenerator } from '@/features/post/components/post-generator/post-generator'
 
-import FacebookIcon from '@/assets/icons/facebook-icon.svg?react'
 export const Home = () => {
     return (
         <Container
