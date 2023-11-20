@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/atoms/button'
 import { SocialSection } from './social-section'
 import { PostStyleSection } from './post-style-section'
+import { ToneVocieSection } from './tone-voice-section'
 
 export const PostGenerator = () => {
     return (
@@ -12,17 +13,21 @@ export const PostGenerator = () => {
                 <SocialSection />
             </fieldset>
             <div>
-                <div>
-                    <label htmlFor="" className="text-2xl font-medium mb-4">
+                <div className="flex justify-between items-center ">
+                    <label
+                        htmlFor="post-masseg"
+                        className="text-2xl font-medium mb-4"
+                    >
                         Your message
                     </label>
-                    <span>0/200 </span>
+                    <span className="text-gray-400">0/200 </span>
                 </div>
                 <textarea
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="10"
+                    className="border border-gray-300 rounded-md w-full p-3"
+                    name="message"
+                    id="post-masseg"
+                    cols={30}
+                    rows={5}
                     placeholder="e.g How to scape tutorial hell"
                 ></textarea>
             </div>
@@ -30,6 +35,7 @@ export const PostGenerator = () => {
                 <legend className="text-2xl font-medium mb-4">
                     <h2>Tone of voice</h2>
                 </legend>
+                <ToneVocieSection />
             </fieldset>
             <fieldset>
                 <legend className="text-2xl font-medium mb-4">
@@ -37,6 +43,7 @@ export const PostGenerator = () => {
                 </legend>
                 <PostStyleSection />
             </fieldset>
+            <Button className="capitalize">Generate post</Button>
         </form>
     )
 }

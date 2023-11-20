@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+
+    body {
+        height: 100vh;
+        height: 100svh;
+    }
+
+    #root {
+        height: 100%;
+    }
+
     @font-face {
         font-family: 'Poppins';
         font-style: normal;

@@ -6,18 +6,19 @@ export const Home = () => {
     return (
         <Container
             tag="main"
-            className="flex flex-col  items-center justify-center"
+            className="flex flex-col  items-center justify-center h-full"
         >
             <section>
-                <h1 className="text-5xl font-semibold text-center">
+                <h1 className="text-5xl font-semibold text-center mb-14">
                     Generate your post
                 </h1>
                 <PostGenerator />
             </section>
-            <section>
-                <h1>Your generated post</h1>
-            </section>
-            <FacebookIcon aria-label="prueba" />
+            {/* <section>
+                <h1 className="text-5xl font-semibold text-center mb-14">
+                    Your generated post
+                </h1>
+            </section> */}
         </Container>
     )
 }
