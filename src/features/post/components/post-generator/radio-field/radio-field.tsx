@@ -5,6 +5,7 @@ interface RadioFieldProps {
     id: string
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
     name: string
+    value: string
 }
 
 export const RadioField = ({
@@ -12,10 +13,12 @@ export const RadioField = ({
     id,
     onChange,
     name,
+    value,
 }: RadioFieldProps) => {
     return (
         <div className={styles['radio-field']}>
             <input
+                value={value}
                 type="radio"
                 name={name}
                 id={id}
