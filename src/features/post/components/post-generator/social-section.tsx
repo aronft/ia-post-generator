@@ -15,6 +15,7 @@ export const SocialSection = () => {
                 <Controller
                     key={id}
                     control={control}
+                    rules={{ required: true }}
                     name="platform"
                     render={({ field: { onChange } }) => (
                         <RadioField

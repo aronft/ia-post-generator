@@ -11,7 +11,7 @@ export type PostGeneratorForm = {
 
 export const PostGenerator = () => {
     const methods = useForm<PostGeneratorForm>()
-    const { handleSubmit } = methods
+    const { handleSubmit, formState } = methods
     const onSubmit: SubmitHandler<PostGeneratorForm> = (data) =>
         console.log(data)
     return (
@@ -39,7 +39,10 @@ export const PostGenerator = () => {
                     </legend>
                     <PostStyleSection />
                 </fieldset>
-                <Button className="capitalize">Generate post</Button>
+
+                <Button className="capitalize" disabled={!formState.isValid}>
+                    Generate post
+                </Button>
             </form>
         </FormProvider>
     )

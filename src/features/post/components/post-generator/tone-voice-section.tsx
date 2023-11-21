@@ -13,6 +13,7 @@ export const ToneVocieSection = () => {
                 <Controller
                     key={id}
                     control={control}
+                    rules={{ required: true }}
                     name="toneVoice"
                     render={({ field: { onChange } }) => (
                         <RadioField

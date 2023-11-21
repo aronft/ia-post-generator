@@ -14,6 +14,7 @@ export const PostStyleSection = () => {
                     key={id}
                     control={control}
                     name="style"
+                    rules={{ required: true }}
                     render={({ field: { onChange } }) => (
                         <RadioField
                             id={id}
