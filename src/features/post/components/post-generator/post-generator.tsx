@@ -5,6 +5,7 @@ import { ToneVocieSection } from './tone-voice-section'
 import { MessageSection } from './message-section'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { usePostGenerator } from '../../hooks/use-post-generator'
+import { usePostStore } from '../../store'
 
 export type PostGeneratorForm = {
     message: string
@@ -14,12 +15,12 @@ export type PostGeneratorForm = {
 }
 
 export const PostGenerator = () => {
+    const isLoading = usePostStore((state) => state.isLoading)
     const methods = useForm<PostGeneratorForm>()
-    const { generatePost, state } = usePostGenerator()
+    const { generatePost } = usePostGenerator()
     const { handleSubmit, formState } = methods
     const onSubmit: SubmitHandler<PostGeneratorForm> = async (data) => {
-        const post = await generatePost(data)
-        console.log(post)
+        generatePost(data)
     }
     return (
         <FormProvider {...methods}>
@@ -47,7 +48,10 @@ export const PostGenerator = () => {
                     <PostStyleSection />
                 </fieldset>
 
-                <Button className="capitalize" disabled={!formState.isValid}>
+                <Button
+                    className="capitalize"
+                    disabled={!formState.isValid || isLoading}
+                >
                     Generate post
                 </Button>
             </form>

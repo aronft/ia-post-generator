@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { PostGeneratorForm } from '../components/post-generator/post-generator'
 import { getEnvVariables } from '@/utils/get-env-variables'
+import { usePostStore } from '../store'
 
 interface Candidate {
     output: string
@@ -10,11 +11,10 @@ interface ApiResponse {
     candidates: Candidate[]
 }
 export const usePostGenerator = () => {
-    const [state, setState] = useState({
-        data: '',
-        isLoading: false,
-        hasError: '',
-    })
+    const updatePost = usePostStore((state) => state.updatePost)
+    const updateView = usePostStore((state) => state.updateView)
+    const setLoading = usePostStore((state) => state.setLoading)
+    const setError = usePostStore((state) => state.setError)
 
     const generatePost = async ({
         message,
@@ -32,7 +32,8 @@ export const usePostGenerator = () => {
             candidate_count: 1,
         }
         try {
-            setState({ ...state, isLoading: true })
+            setLoading(true)
+            updateView('view')
             const response = await fetch(
                 `https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText`,
                 {
@@ -48,32 +49,26 @@ export const usePostGenerator = () => {
             const outputs = data.candidates.map(
                 (candidate: Candidate) => candidate.output
             )
+            setLoading(false)
             if (outputs.length === 0) {
-                setState({
-                    ...state,
-                    data: '',
-                    isLoading: false,
-                    hasError: 'No results generated',
-                })
+                updatePost('')
+                setError('Not oupt generated')
             }
             const output = outputs[0]
-            setState({ ...state, data: output, isLoading: false })
+            updatePost(output)
+            updateView('view')
             return {
                 data: output,
                 isLoading: false,
                 hasError: '',
             }
         } catch (error) {
-            setState({
-                ...state,
-                isLoading: false,
-                hasError: 'Something went wrong',
-            })
+            setLoading(false)
+            setError('Something went wrong, please try again later')
         }
     }
 
     return {
-        state,
         generatePost,
     }
 }

@@ -6,7 +6,7 @@ const buttonVariants = cva('p-3 rounded-md', {
         variant: {
             fill: 'bg-brand-green-400 text-white   disabled:bg-brand-gray',
             outline:
-                'bg-transparent border border-gray-400 text-black disabled:text-gray-400',
+                'bg-transparent border-2 border-gray-300 text-black disabled:text-gray-400',
         },
     },
     defaultVariants: {
