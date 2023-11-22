@@ -4,16 +4,23 @@ import { PostStyleSection } from './post-style-section'
 import { ToneVocieSection } from './tone-voice-section'
 import { MessageSection } from './message-section'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import { usePostGenerator } from '../../hooks/use-post-generator'
 
 export type PostGeneratorForm = {
     message: string
+    platform: string
+    toneVoice: string
+    style: string
 }
 
 export const PostGenerator = () => {
     const methods = useForm<PostGeneratorForm>()
+    const { generatePost, state } = usePostGenerator()
     const { handleSubmit, formState } = methods
-    const onSubmit: SubmitHandler<PostGeneratorForm> = (data) =>
-        console.log(data)
+    const onSubmit: SubmitHandler<PostGeneratorForm> = async (data) => {
+        const post = await generatePost(data)
+        console.log(post)
+    }
     return (
         <FormProvider {...methods}>
             <form
