@@ -1,9 +1,11 @@
 import { create } from 'zustand'
 import { PostGeneratorForm } from '../components/post-generator/post-generator'
-import { set } from 'react-hook-form'
+import { persist } from 'zustand/middleware'
+
+type PostView = 'generator' | 'view'
 
 interface PostState {
-    postView: 'generator' | 'view'
+    postView: PostView
     post: string
     postForm: PostGeneratorForm
     isLoading: boolean
@@ -11,24 +13,30 @@ interface PostState {
     updatePost: (post: string) => void
     setLoading: (state: boolean) => void
     setError: (error: string) => void
-    updateView: (view: 'generator' | 'view') => void
+    updateView: (view: PostView) => void
     updatePostForm: (form: PostGeneratorForm) => void
 }
-
-export const usePostStore = create<PostState>()((set) => ({
-    postView: 'generator',
-    post: '',
-    error: '',
-    isLoading: false,
-    postForm: {
-        message: '',
-        platform: '',
-        style: '',
-        toneVoice: '',
-    },
-    updatePost: (post: string) => set(() => ({ post })),
-    setLoading: (state) => set(() => ({ isLoading: state })),
-    setError: (error: string) => set(() => ({ error })),
-    updateView: (view) => set(() => ({ postView: view })),
-    updatePostForm: (form) => set(() => ({ postForm: form })),
-}))
+export const usePostStore = create<PostState>()(
+    persist(
+        (set) => ({
+            postView: 'generator',
+            post: '',
+            error: '',
+            isLoading: false,
+            postForm: {
+                message: '',
+                platform: '',
+                style: '',
+                toneVoice: '',
+            },
+            updatePost: (post: string) => set(() => ({ post })),
+            setLoading: (state) => set(() => ({ isLoading: state })),
+            setError: (error: string) => set(() => ({ error })),
+            updateView: (view: PostView) => set(() => ({ postView: view })),
+            updatePostForm: (form) => set(() => ({ postForm: form })),
+        }),
+        {
+            name: 'post-storage',
+        }
+    )
+)

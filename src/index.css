@@ -4,14 +4,16 @@
 
 @layer base {
 
-    body {
+    body, #root {
         height: 100vh;
         height: 100svh;
     }
 
     #root {
-        /* height: 100%; */
+        display: grid;
+        place-items: center;
     }
+
 
     @font-face {
         font-family: 'Poppins';

@@ -40,7 +40,7 @@ export const PostGeneratedView = ({ content }: Post) => {
                 )}
             </div>
 
-            <div className="flex justify-between items-center gap-5">
+            <div className="flex justify-between items-center gap-5 flex-col  md:flex-row">
                 <Button
                     onClick={() => updateView('generator')}
                     disabled={isLoading}

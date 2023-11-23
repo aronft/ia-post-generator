@@ -7,19 +7,16 @@ export const Home = () => {
     const post = usePostStore((state) => state.post)
     const postView = usePostStore((state) => state.postView)
     return (
-        <Container
-            tag="main"
-            className="flex flex-col  items-center  pt-10 md:pt-28 h-full pb-20"
-        >
+        <Container tag="main" className=" pt-10 pb-10  h-full  max-w-2xl">
             {postView === 'view' ? (
-                <section>
+                <section className="">
                     <h1 className="text-5xl font-semibold text-center mb-14">
                         Your generated post
                     </h1>
                     <PostGeneratedView content={post} />
                 </section>
             ) : (
-                <section>
+                <section className="h-full flex flex-col justify-center  items-center">
                     <h1 className="text-5xl font-semibold text-center mb-14">
                         Generate your post
                     </h1>
