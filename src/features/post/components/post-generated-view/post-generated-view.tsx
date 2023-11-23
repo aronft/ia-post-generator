@@ -4,10 +4,13 @@ import BackIcon from '@/assets/icons/back-icon.svg?react'
 import ReloadIcon from '@/assets/icons/regenerate-icon.svg?react'
 import CopyIcon from '@/assets/icons/copy-icon.svg?react'
 import { usePostStore } from '../../store'
+import { usePostGenerator } from '../../hooks/use-post-generator'
 
 export const PostGeneratedView = ({ content }: Post) => {
     const isLoading = usePostStore((state) => state.isLoading)
+    const postForm = usePostStore((state) => state.postForm)
     const updateView = usePostStore((state) => state.updateView)
+    const { generatePost } = usePostGenerator()
     const copyContentToClipboard = async () => {
         try {
             await navigator.clipboard.writeText(content)
@@ -18,14 +21,14 @@ export const PostGeneratedView = ({ content }: Post) => {
     return (
         <div className="flex flex-col gap-y-10">
             <div className="w-full  relative">
-                <p
-                    className={`pr-10 w-full rounded-md border-2 p-2  border-gray-300 ${
+                <div
+                    className={`pr-10 min-h-[3rem]  w-full whitespace-pre-line rounded-md border-2 p-2  border-gray-300 ${
                         isLoading ? 'text-brand-gray' : ''
                     }`}
                     aria-label="post content generated"
                 >
                     {isLoading ? '...loading' : content}
-                </p>
+                </div>
                 {!isLoading && (
                     <button
                         aria-label="copy post"
@@ -48,6 +51,7 @@ export const PostGeneratedView = ({ content }: Post) => {
                     Back to Generator
                 </Button>
                 <Button
+                    onClick={() => generatePost(postForm)}
                     disabled={isLoading}
                     className="flex items-center gap-2 w-full justify-center"
                 >

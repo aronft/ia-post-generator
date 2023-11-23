@@ -16,10 +16,12 @@ export type PostGeneratorForm = {
 
 export const PostGenerator = () => {
     const isLoading = usePostStore((state) => state.isLoading)
+    const updatePostForm = usePostStore((state) => state.updatePostForm)
     const methods = useForm<PostGeneratorForm>()
     const { generatePost } = usePostGenerator()
     const { handleSubmit, formState } = methods
     const onSubmit: SubmitHandler<PostGeneratorForm> = async (data) => {
+        updatePostForm(data)
         generatePost(data)
     }
     return (

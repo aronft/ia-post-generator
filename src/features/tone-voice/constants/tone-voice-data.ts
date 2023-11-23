@@ -11,6 +11,10 @@ export const ToneVoiceData: ToneVoice[] = [
     },
     {
         id: crypto.randomUUID(),
+        name: 'Friendly',
+    },
+    {
+        id: crypto.randomUUID(),
         name: 'Informal',
     },
     {

@@ -9,7 +9,7 @@ export const Home = () => {
     return (
         <Container
             tag="main"
-            className="flex flex-col  items-center  pt-10 md:pt-28 h-full"
+            className="flex flex-col  items-center  pt-10 md:pt-28 h-full pb-20"
         >
             {postView === 'view' ? (
                 <section>

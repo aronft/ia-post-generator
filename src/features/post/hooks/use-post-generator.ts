@@ -1,14 +1,12 @@
-import { useState } from 'react'
 import { PostGeneratorForm } from '../components/post-generator/post-generator'
 import { getEnvVariables } from '@/utils/get-env-variables'
 import { usePostStore } from '../store'
-
-interface Candidate {
-    output: string
-}
+import { capitalizeFirstLetter } from '../utils/capitalize-first-letter'
 
 interface ApiResponse {
-    candidates: Candidate[]
+    status: number
+    message: string
+    data: string
 }
 export const usePostGenerator = () => {
     const updatePost = usePostStore((state) => state.updatePost)
@@ -23,45 +21,34 @@ export const usePostGenerator = () => {
         toneVoice,
     }: PostGeneratorForm) => {
         const variables = getEnvVariables()
-        const prompt = {
-            text: `We are a post generator web platform, create a ${style} post style, with a ${toneVoice} voice for ${platform} platform about ${message}`,
-        }
         const requestBody = {
-            prompt,
-            temperature: 0.1,
-            candidate_count: 1,
+            message,
+            platform,
+            style,
+            toneVoice,
         }
         try {
             setLoading(true)
             updateView('view')
-            const response = await fetch(
-                `https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-goog-api-key': variables.languageModelApi,
-                    },
-                    body: JSON.stringify(requestBody),
-                }
-            )
+            const response = await fetch(`${variables.apiUrl}/generate-post`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody),
+            })
             const data: ApiResponse = await response.json()
-            const outputs = data.candidates.map(
-                (candidate: Candidate) => candidate.output
-            )
+
+            data.data = capitalizeFirstLetter(data.data)
+
             setLoading(false)
-            if (outputs.length === 0) {
+            if (data.data == null) {
                 updatePost('')
-                setError('Not oupt generated')
+                setError(data.message)
+                return
             }
-            const output = outputs[0]
-            updatePost(output)
+            updatePost(data.data)
             updateView('view')
-            return {
-                data: output,
-                isLoading: false,
-                hasError: '',
-            }
         } catch (error) {
             setLoading(false)
             setError('Something went wrong, please try again later')
