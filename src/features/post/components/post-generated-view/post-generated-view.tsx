@@ -14,9 +14,7 @@ export const PostGeneratedView = ({ content }: Post) => {
     const copyContentToClipboard = async () => {
         try {
             await navigator.clipboard.writeText(content)
-        } catch (error) {
-            console.log('error', error)
-        }
+        } catch (error) {}
     }
     return (
         <div className="flex flex-col gap-y-10">

@@ -28,7 +28,6 @@ export const usePostGenerator = () => {
             toneVoice,
         }
         try {
-            console.log(variables.apiUrl)
             setLoading(true)
             updateView('view')
             const response = await fetch(`${variables.apiUrl}/generate-post`, {
