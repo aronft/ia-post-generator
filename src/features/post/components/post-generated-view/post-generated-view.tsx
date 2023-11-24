@@ -6,6 +6,8 @@ import CopyIcon from '@/assets/icons/copy-icon.svg?react'
 import { usePostStore } from '../../store'
 import { usePostGenerator } from '../../hooks/use-post-generator'
 
+import Markdown from 'react-markdown'
+
 export const PostGeneratedView = ({ content }: Post) => {
     const isLoading = usePostStore((state) => state.isLoading)
     const postForm = usePostStore((state) => state.postForm)
@@ -25,7 +27,7 @@ export const PostGeneratedView = ({ content }: Post) => {
                     }`}
                     aria-label="post content generated"
                 >
-                    {isLoading ? '...loading' : content}
+                    <Markdown>{isLoading ? '...loading' : content}</Markdown>
                 </div>
                 {!isLoading && (
                     <button
