@@ -7,11 +7,15 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "test": "cross-env test_env=development.local npx playwright test ",
+        "test:ui": "cross-env test_env=development.local npx playwright test --ui ",
+        "test:prod": " playwright test"
     },
     "dependencies": {
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.0.0",
+        "dotenv": "^16.3.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.48.2",
@@ -19,6 +23,7 @@
         "zustand": "^4.4.6"
     },
     "devDependencies": {
+        "@playwright/test": "^1.40.0",
         "@types/node": "^20.9.0",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",
@@ -26,6 +31,7 @@
         "@typescript-eslint/parser": "^6.0.0",
         "@vitejs/plugin-react-swc": "^3.3.2",
         "autoprefixer": "^10.4.16",
+        "cross-env": "^7.0.3",
         "eslint": "^8.45.0",
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-react-hooks": "^4.6.0",

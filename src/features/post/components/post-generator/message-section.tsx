@@ -8,7 +8,7 @@ export const MessageSection = () => {
         <div>
             <div className="flex justify-between items-center ">
                 <label
-                    htmlFor="post-masseg"
+                    htmlFor="post-message"
                     className="text-2xl font-medium mb-4"
                 >
                     Your message
@@ -46,7 +46,7 @@ export const MessageSection = () => {
                         <>
                             <textarea
                                 className={`border border-gray-300  rounded-md w-full p-3 ${borderColor}`}
-                                id="post-masseg"
+                                id="post-message"
                                 cols={30}
                                 rows={5}
                                 placeholder="e.g How to scape tutorial hell"
